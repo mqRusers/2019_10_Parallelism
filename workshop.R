@@ -73,7 +73,7 @@ for (seed in 1:10) {
 }
 
 # and we could APPLY the workload function to an array of SEEDs
-sapply(1:10, workload)
+lapply(1:10, workload)
 
 # but which one is faster, loops ...
 system.time({
@@ -85,28 +85,23 @@ system.time({
 
 # or applying ?
 system.time({
-  print(sapply(1:10, workload))
+  print(lapply(1:10, workload))
 })
 
 
-# Now we go parallel ...
+# Now we go parallel to go faster ...
 library(parallel)
 
-# How many CPU cores do we have
+# How many CPU cores do we have available on our machine
 detectCores()
 numCores <- detectCores()
 
 
-
-
-# with more than 1 core we should be able more work at the same time
-
 # Let try it with a parallel loop
-library(foreach)
 
 install.packages("doParallel")
 library(doParallel)
-
+library(foreach)
 
 cl <- makeCluster(numCores)
 registerDoParallel(cl)
