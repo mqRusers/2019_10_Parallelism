@@ -1,3 +1,3 @@
 # command line script example
 
-print(paste0("PI is approximately:", pi))
+print(paste("PI is approximately:", pi))

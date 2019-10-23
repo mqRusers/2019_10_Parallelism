@@ -1,0 +1,3 @@
+git config --global user.name "richard.miller@mq.edu.au"
+git config --global user.email "richard.miller@mq.edu.au"
+
