@@ -1,3 +1,4 @@
-git config --global user.name "richard.miller@mq.edu.au"
+git remote set-url origin http://richard-miller@github.com/mqRusers/2019_10_Parallelism.git
+git config --global user.name "Richard Miller"
 git config --global user.email "richard.miller@mq.edu.au"
 
