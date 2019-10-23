@@ -2,7 +2,7 @@
 # 2019_10_Parallelism
 #
 
-# Let's create some articifal work to be done using R's Random Uniform Distribution function "runif(x)"
+# Let's create some articifal work using R's Random Uniform Distribution function "runif(x)"
 
 
 distribution <- runif(10)
@@ -55,7 +55,6 @@ system.time({
 # Most scientific compute task involve doing similar things over and over.
 # Let's simulate this by computing averages for 10 different SEEDs
 
-workload(0)
 workload(1)
 workload(2)
 workload(3)
@@ -65,24 +64,61 @@ workload(6)
 workload(7)
 workload(8)
 workload(9)
+workload(10)
 
 # or of course we could use a FOR loop ...
-for (seed in 0:9) {
+for (seed in 1:10) {
   average <- workload(seed)
   print(average)
 }
 
 # and we could APPLY the workload function to an array of SEEDs
-sapply(0:9, workload)
+sapply(1:10, workload)
 
-# but which one is faster ?
+# but which one is faster, loops ...
 system.time({
-  for (seed in 0:9) {
+  for (seed in 1:10) {
     average <- workload(seed)
     print(average)
   }
 })
 
+# or applying ?
 system.time({
-  print(sapply(0:9, workload))
+  print(sapply(1:10, workload))
+})
+
+
+# Now we go parallel ...
+library(parallel)
+
+# How many CPU cores do we have
+detectCores()
+numCores <- detectCores()
+
+
+
+
+# with more than 1 core we should be able more work at the same time
+
+# Let try it with a parallel loop
+library(foreach)
+
+install.packages("doParallel")
+library(doParallel)
+
+
+cl <- makeCluster(numCores)
+registerDoParallel(cl)
+
+system.time({
+  foreach (seed=1:10) %dopar% {
+    average <- workload(seed)
+    print(average)
+  } 
+})
+
+# and similarly we can do a parallel APPLY
+system.time({
+  results = mclapply(1:10, workload, mc.cores = numCores)
 })
