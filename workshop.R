@@ -103,7 +103,7 @@ install.packages("doParallel")
 library(doParallel)
 library(foreach)
 
-cl <- makeCluster(numCores)
+cl <- makeCluster(numCores/2)
 registerDoParallel(cl)
 
 system.time({
