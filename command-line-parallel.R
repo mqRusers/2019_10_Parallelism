@@ -11,8 +11,9 @@ workload <- function (seed=0) {
 
 
 # make sure we have all the required packages installed
-if (!require(doParallel)) install.packages("doParallel")
-if (!require(foreach)) install.packages("foreach")
+
+# if (!require(doParallel)) install.packages("doParallel")
+# if (!require(foreach)) install.packages("foreach")
 
 # load up our libraries
 library(parallel)

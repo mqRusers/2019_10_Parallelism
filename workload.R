@@ -23,19 +23,19 @@
 #
 
 # Let's create some articifal work using R's Random Uniform Distribution function "runif(x)"
-
-
 distribution <- runif(10)
 average <- mean(distribution)
 print(average)
 barplot(distribution)
 
 # now let's set the SEED to get predictable numbers
+{
 set.seed(12345678)
 distribution <- runif(10)
 average <- mean(distribution)
 print(average)
 barplot(distribution)
+}
 
 # And lets create more work (scaling up)
 {
