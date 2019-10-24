@@ -15,10 +15,12 @@ cl <- makeCluster(numCores)
 registerDoParallel(cl)
 
 system.time({
-  foreach (seed=1:100) %dopar% {
-    average <- workload(seed)
+  result <- c()
+  foreach (seed=1:10) %dopar% {
+    result[seed] <- workload(seed)
     print(average)
   } 
+  print(result)
 })
 
 # and similarly we can do a parallel APPLY

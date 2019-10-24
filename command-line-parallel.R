@@ -24,7 +24,7 @@ numCores <- detectCores()
 
 # Form a cluster with all available Cores
 print(paste0("Creating Cluster (numCores=", numCores, ") ..."))
-cl <- makeCluster(numCores)
+cl <- makeCluster(numCores, outfile="")
 
 # Give our fresh cluster to DoParallel
 registerDoParallel(cl)
@@ -33,13 +33,13 @@ print("Starting Parallel Loop ...")
 system.time({
   foreach (seed=1:100) %dopar% {
     average <- workload(seed)
-    print(average)
+    print(seed)
   } 
 })
 
 
 print("Starting Parallel Apply ...")
 system.time({
-  results = mclapply(1:10, workload, mc.cores = numCores)
-  print(results)
+  results = mclapply(1:100, workload, mc.cores = numCores)
+  #print(results)
 })
