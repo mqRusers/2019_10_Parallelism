@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#PBS -P sa4
+#PBS -q express
+#PBS -l ncpus=16
+#PBS -l walltime=00:05:00
+#PBS -l wd
+
+module load R
+Rscript parallel-command.R
